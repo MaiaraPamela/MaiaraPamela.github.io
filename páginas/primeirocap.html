@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Capítulo 1 - O Mistério da Floresta Encantada</title>
+    <link rel="icon" href="../img/logo.png" type="image/x-icon">
+    
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins&display=swap" rel="stylesheet">
+
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+            background-color: #f8f9fa;
+        }
+
+        .navbar {
+            background-color: #800000;
+        }
+
+        .sidebar {
+            background-color: #ffffff;
+            padding: 20px;
+            border-right: 1px solid #ddd;
+            height: 100vh;
+            position: fixed;
+            width: 250px;
+            transition: transform 0.3s ease;
+            transform: translateX(0);
+        }
+
+        .sidebar.closed {
+            transform: translateX(-100%);
+        }
+
+        .main-content {
+            margin-left: 270px;
+            padding: 20px;
+            transition: margin-left 0.3s ease;
+        }
+
+        .sidebar-toggle {
+            position: absolute;
+            top: 20px;
+            left: 20px;
+            cursor: pointer;
+        }
+
+        h1 {
+            color: #800000;
+        }
+
+        .chapter-content {
+            margin-top: 20px;
+            background-color: #ffffff;
+            padding: 15px;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .kudos-comments {
+            margin-top: 20px;
+            background-color: #e9ecef;
+            padding: 15px;
+            border-radius: 5px;
+        }
+
+        .chapter-list {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f4f4f4;
+            border-radius: 5px;
+        }
+
+        .next-chapter {
+            margin-top: 20px;
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="pagina_inicial.html">
+            <img src="../img/5.png" alt="Logo" width="50" height="auto">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarNav">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="fandomsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Fandoms
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="fandomsDropdown">
+                        <li><a class="dropdown-item" href="fandom1.html">Anime e Mangá</a></li>
+                        <li><a class="dropdown-item" href="#">Livros e Literatura</a></li>
+                        <li><a class="dropdown-item" href="#">Jogos de vídeo</a></li>
+                        <li><a class="dropdown-item" href="#">Celebridades</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="navegarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Navegar
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="navegarDropdown">
+                        <li><a class="dropdown-item" href="#">Explorar Obras</a></li>
+                        <li><a class="dropdown-item" href="#">Séries</a></li>
+                        <li><a class="dropdown-item" href="colecoes.html">Coleções</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="publicarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Publicar
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="publicarDropdown">
+                        <li><a class="dropdown-item" href="novaobra.html">Publicar Nova Obra</a></li>
+                        <li><a class="dropdown-item" href="minhasobras.html">Minhas Obras</a></li>
+                        <li><a class="dropdown-item" href="#">Criar Coleção</a></li>
+                    </ul>
+                </li>
+                <li class="nav-item dropdown">
+                    <a class="nav-link dropdown-toggle" href="#" id="sobreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        Sobre
+                    </a>
+                    <ul class="dropdown-menu" aria-labelledby="sobreDropdown">
+                        <li><a class="dropdown-item" href="sobre.html">Sobre o AO3</a></li>
+                        <li><a class="dropdown-item" href="organizacoes.html">Organização para Obras Transformativas</a></li>
+                        <li><a class="dropdown-item" href="perguntas.html">Perguntas frequentes</a></li>
+                    </ul>
+                </li>
+            </ul>
+            <form class="d-flex mx-auto" style="max-width: 600px;">
+                <input class="form-control me-2" type="search" placeholder="Pesquisar histórias e autores" aria-label="Search">
+                <button class="btn btn-outline-light" type="submit" style="border-radius: 50%; padding: 0 10px;">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
+
+        </div>
+    </div>
+    <div class="user-options">
+        <span>Olá, user</span>
+        <div class="user-options-content">
+          <a href="novaobra.html">Postar</a>
+          <a href="notificacoes.html">Notificações</a>
+          <a href="perfil.html">Perfil</a>
+          <a href="pagina_inicial.html">Log out</a>
+        </div>
+      </div>
+</nav>
+
+    <div class="sidebar" id="sidebar">
+        <h4>Capítulos</h4>
+        <button class="btn btn-outline-secondary" id="toggleSidebar">Fechar</button>
+        <ul class="list-unstyled chapter-list">
+            <li>Capítulo 1: O Chamado da Floresta</li>
+            <li>Capítulo 2: O Encontro Misterioso</li>
+            <li>Capítulo 3: Segredos Antigos</li>
+            <li>Capítulo 4: A Jornada Começa</li>
+            <li>Capítulo 5: O Confronto Final</li>
+        </ul>
+    </div>
+
+    <div class="main-content" id="mainContent">
+        <h1>O Mistério da Floresta Encantada</h1>
+        <div class="chapter-content">
+            <p>Capítulo 1: O Chamado da Floresta</p>
+            <p>Era uma vez, em uma pequena aldeia cercada por uma floresta densa e mágica, um jovem chamado Lucas. Desde pequeno, Lucas ouvia histórias sobre os mistérios que a floresta guardava. Certa noite, ao olhar pela janela, ele viu uma luz brilhante no coração da floresta, como se estivesse chamando-o para dentro.</p>
+            <p>Impulsionado pela curiosidade e pela coragem, Lucas decidiu seguir a luz. Enquanto se aventurava pela floresta, sons estranhos ecoavam ao seu redor e sombras dançavam entre as árvores. Ele sentia que algo extraordinário estava prestes a acontecer.</p>
+            <p>Com o coração acelerado, Lucas se aproximou da fonte da luz e, de repente, foi surpreendido por uma figura misteriosa que surgiu diante dele. Era uma criatura mágica, com olhos brilhantes e um sorriso enigmático, que parecia conhecer os segredos da floresta.</p>
+        </div>
+
+        <div class="next-chapter">
+            <a href="#" class="btn btn-primary">Próximo Capítulo</a>
+        </div>
+
+        <div class="kudos-comments">
+            <h5>Kudos e Comentários</h5>
+            <button class="btn btn-success">Dar Kudos</button>
+            <div class="mt-3">
+                <h6>Deixe um comentário:</h6>
+                <textarea class="form-control" rows="4" placeholder="Escreva seu comentário..."></textarea>
+                <button class="btn btn-primary mt-2">Enviar Comentário</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        const toggleSidebarButton = document.getElementById('toggleSidebar');
+        const sidebar = document.getElementById('sidebar');
+        const mainContent = document.getElementById('mainContent');
+
+        toggleSidebarButton.addEventListener('click', () => {
+            sidebar.classList.toggle('closed');
+            if (sidebar.classList.contains('closed')) {
+                toggleSidebarButton.innerText = 'Abrir';
+                mainContent.style.marginLeft = '20px';
+            } else {
+                toggleSidebarButton.innerText = 'Fechar';
+                mainContent.style.marginLeft = '270px';
+            }
+        });
+    </script>
+</body>
+</html>
