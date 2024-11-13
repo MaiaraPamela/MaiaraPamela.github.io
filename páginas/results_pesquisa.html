@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Resultados de Pesquisa - AO3</title>
+  <link rel="icon" href="../img/logo.png" type="image/x-icon">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .search-results {
+      text-align: center;
+      padding: 50px;
+      color: #800000;
+    }
+
+    .search-results h2 {
+      font-family: 'Playfair Display', serif;
+      font-size: 2.5rem;
+      margin-bottom: 20px;
+    }
+
+    .search-results p {
+      font-family: 'Poppins', sans-serif;
+      font-size: 1.2rem;
+      color: #555;
+    }
+
+    .btn-back {
+      background-color: #800000;
+      color: white;
+      font-family: 'Poppins', sans-serif;
+      font-size: 1rem;
+      padding: 10px 20px;
+      border-radius: 5px;
+      text-decoration: none;
+    }
+
+    .btn-back:hover {
+      background-color: #a00000;
+      color: #fff;
+    }
+  </style>
+</head>
+<body>
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <div class="container-fluid">
+      <a class="navbar-brand" href="pagina_inicial.html">
+        <img src="../img/5.png" alt="Logo" width="50" height="auto">
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+      <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+          <!-- Menus de navegação - Igual ao dashboard -->
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="fandomsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Fandoms</a>
+            <ul class="dropdown-menu" aria-labelledby="fandomsDropdown">
+              <li><a class="dropdown-item" href="fandomUm.html">Anime e Mangá</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="navegarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Navegar</a>
+            <ul class="dropdown-menu" aria-labelledby="navegarDropdown">
+              <li><a class="dropdown-item" href="colecoes.html">Coleções</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="publicarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Publicar</a>
+            <ul class="dropdown-menu" aria-labelledby="publicarDropdown">
+              <li><a class="dropdown-item" href="novaobra.html">Publicar Obra</a></li>
+              <li><a class="dropdown-item" href="minhasobras.html">Minhas Obras</a></li>
+            </ul>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle" href="#" id="sobreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">Sobre</a>
+            <ul class="dropdown-menu" aria-labelledby="sobreDropdown">
+              <li><a class="dropdown-item" href="sobre.html">Sobre o AO3</a></li>
+              <li><a class="dropdown-item" href="organizacoes.html">Organização para Obras Transformativas</a></li>
+              <li><a class="dropdown-item" href="perguntas.html">Perguntas frequentes</a></li>
+            </ul>
+          </li>
+        </ul>
+      </div>
+    </div>
+  </nav>
+
+  <div class="search-results">
+    <h2>Resultados de Pesquisa</h2>
+    <p>Infelizmente, não encontramos nenhum resultado para sua pesquisa.</p>
+    <p>Tente usar outros termos ou verifique a ortografia.</p>
+    <a href="dashboard.html" class="btn-back">Voltar ao Dashboard</a>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
