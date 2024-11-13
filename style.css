@@ -275,3 +275,31 @@ button.btn-outline-light {
 button.btn-outline-light:hover {
     background-color: #660000; 
 }
+.user-options {
+    position: relative;
+    display: inline-block;
+  }
+
+  .user-options-content {
+    display: none;
+    position: absolute;
+    background-color: #f9f9f9;
+    box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
+    z-index: 1;
+    right: 0;
+  }
+
+  .user-options-content a {
+    color: black;
+    padding: 12px 16px;
+    text-decoration: none;
+    display: block;
+  }
+
+  .user-options-content a:hover {
+    background-color: #f1f1f1;
+  }
+
+  .user-options:hover .user-options-content {
+    display: block;
+  }
