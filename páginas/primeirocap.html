@@ -16,88 +16,72 @@
             margin: 0;
             padding: 0;
         }
-
-        .navbar {
-            z-index: 1050;
-        }
-
-        .sidebar {
-        background-color: #ffffff;
-        padding: 20px 20px 20px 20px;
-        padding-top: 60px; /* Empurra o conteúdo para baixo */
-        border-left: 1px solid #ddd;
-        height: 100vh;
-        position: fixed;
-        top: 56px; /* Alinha ao menu principal */
-        right: 0;
-        width: 250px;
-        transform: translateX(100%);
-        transition: transform 0.3s ease;
-        }
-        .sidebar h4 {
-        margin-top: 10px; /* Para refinar o espaçamento do título se necessário */
-        }
-
-
-
-        .sidebar.open {
-            transform: translateX(0);
-        }
-
-        .main-content {
-            margin-right: 20px;
-            padding: 20px;
-            transition: margin-right 0.3s ease;
-        }
-
-        .main-content.sidebar-open {
-            margin-right: 270px;
-        }
-
-        .sidebar-toggle {
-            position: fixed;
-            top: 15px;
-            right: 20px;
-            z-index: 1100;
-            background: #ffffff;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            outline: none;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
-            padding: 5px 10px;
-            border-radius: 5px;
-        }
-
         h1 {
             color: #800000;
         }
-
         .chapter-content {
             margin-top: 20px;
             background-color: #ffffff;
-            padding: 15px;
+            padding: 20px;
             border-radius: 5px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
         }
-
-        .kudos-comments {
-            margin-top: 20px;
-            background-color: #e9ecef;
-            padding: 15px;
-            border-radius: 5px;
+        .btn-kudos {
+            background-color: #ff4d4d;
+            border: none;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+            transition: transform 0.2s ease, background-color 0.3s ease;
         }
-
-        .chapter-list {
-            margin-top: 20px;
-            padding: 10px;
-            background-color: #f4f4f4;
-            border-radius: 5px;
+        .btn-kudos.clicked {
+            background-color: #b30000;
         }
-
+        #heartIcon {
+            font-size: 1.5rem;
+            color: white;
+        }
+        .kudos-section {
+            margin-top: 30px;
+            text-align: center;
+        }
+        .kudos-section p {
+            margin-bottom: 10px;
+            color: #666;
+        }
         .next-chapter {
             margin-top: 20px;
             text-align: center;
+        }
+        .next-chapter .btn-next {
+            background-color: #ff4d4d;
+            border: none;
+            color: white;
+            padding: 10px 20px;
+            border-radius: 5px;
+            font-size: 1rem;
+            text-transform: uppercase;
+            font-weight: bold;
+            cursor: pointer;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        .next-chapter .btn-next:hover {
+            background-color: #cc0000;
+        }
+        .comment-section {
+            margin-top: 30px;
+            padding: 15px;
+            background-color: #e9ecef;
+            border-radius: 5px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+        .comment-section textarea {
+            resize: none;
         }
     </style>
 </head>
@@ -165,29 +149,31 @@
         <ul class="list-unstyled chapter-list">
             <li>Capítulo 1: O Chamado da Floresta</li>
             <li>Capítulo 2: O Encontro Misterioso</li>
-            <li>Capítulo 3: Segredos Antigos</li>
-            <li>Capítulo 4: A Jornada Começa</li>
-            <li>Capítulo 5: O Confronto Final</li>
         </ul>
     </div>
 
-    <div class="main-content" id="mainContent">
+    <div class="container mt-4">
         <h1>O Mistério da Floresta Encantada</h1>
         <div class="chapter-content">
-            <p>Capítulo 1: O Chamado da Floresta</p>
-            <p>Era uma vez, em uma pequena aldeia cercada por uma floresta densa e mágica, um jovem chamado Lucas...</p>
+            <p><strong>Capítulo 1: O Chamado da Floresta</strong></p>
+            <p>Era uma vez, em uma pequena aldeia cercada por uma floresta densa e mágica, um jovem chamado Lucas. Desde pequeno, ele ouvia histórias sobre criaturas misteriosas que habitavam a floresta e sobre um tesouro lendário escondido em seu coração. Lucas, curioso e aventureiro, sempre quis explorar o local, mas era advertido pelos mais velhos sobre os perigos que ali residiam.</p>
+            <p>Uma noite, enquanto admirava as estrelas, Lucas ouviu um som peculiar vindo da direção da floresta. Era como um chamado, um canto distante que parecia sussurrar seu nome. Intrigado, ele decidiu seguir o som, munido apenas de sua coragem e uma lanterna.</p>
+            <p>Ao entrar na floresta, ele percebeu que a atmosfera era diferente. As árvores pareciam sussurrar entre si, e a lua iluminava o caminho com uma intensidade surreal. Após caminhar por algumas horas, Lucas encontrou uma clareira onde havia uma pequena fonte cintilante. Ao se aproximar, percebeu que o som vinha de lá. Ao olhar seu reflexo na água, ele viu não apenas sua imagem, mas cenas de um mundo diferente, cheio de magia e mistério.</p>
+            <p>Mal sabia ele que essa aventura mudaria sua vida para sempre.</p>
+        </div>
+        <div class="kudos-section">
+            <p>Deixar Kudos</p>
+            <button id="kudosButton" class="btn-kudos">
+                <i id="heartIcon" class="bi bi-heart"></i>
+            </button>
         </div>
         <div class="next-chapter">
-            <a href="#" class="btn btn-primary">Próximo Capítulo</a>
+            <a href="segundocap.html" class="btn-next">Próximo Capítulo</a>
         </div>
-        <div class="kudos-comments">
-            <h5>Kudos e Comentários</h5>
-            <button class="btn btn-success">Dar Kudos</button>
-            <div class="mt-3">
-                <h6>Deixe um comentário:</h6>
-                <textarea class="form-control" rows="4" placeholder="Escreva seu comentário..."></textarea>
-                <button class="btn btn-primary mt-2">Enviar Comentário</button>
-            </div>
+        <div class="comment-section mt-4">
+            <h5>Deixe um comentário</h5>
+            <textarea class="form-control" rows="4" placeholder="Escreva seu comentário..."></textarea>
+            <button class="btn btn-primary mt-2">Enviar Comentário</button>
         </div>
     </div>
 
@@ -200,6 +186,13 @@
         toggleSidebarButton.addEventListener('click', () => {
             sidebar.classList.toggle('open');
             mainContent.classList.toggle('sidebar-open');
+        });
+
+        document.getElementById('kudosButton').addEventListener('click', function () {
+            const heartIcon = document.getElementById('heartIcon');
+            this.classList.toggle('clicked');
+            heartIcon.classList.toggle('bi-heart');
+            heartIcon.classList.toggle('bi-heart-fill');
         });
     </script>
 </body>
