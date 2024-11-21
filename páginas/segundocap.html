@@ -207,8 +207,8 @@
 
         <div class="kudos-section">
             <p>Deixar Kudos</p>
-            <button class="btn-kudos" id="kudosButton">
-                <i class="bi bi-heart-fill" id="heartIcon"></i>
+            <button id="kudosButton" class="btn-kudos">
+                <i id="heartIcon" class="bi bi-heart"></i>
             </button>
         </div>
 
@@ -225,17 +225,22 @@
         </div>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+        const toggleSidebarButton = document.getElementById('toggleSidebar');
         const sidebar = document.getElementById('sidebar');
-        const toggleSidebar = document.getElementById('toggleSidebar');
-        const kudosButton = document.getElementById('kudosButton');
+        const mainContent = document.getElementById('mainContent');
 
-        toggleSidebar.addEventListener('click', () => {
+        toggleSidebarButton.addEventListener('click', () => {
             sidebar.classList.toggle('open');
+            mainContent.classList.toggle('sidebar-open');
         });
 
-        kudosButton.addEventListener('click', () => {
-            kudosButton.classList.toggle('clicked');
+        document.getElementById('kudosButton').addEventListener('click', function () {
+            const heartIcon = document.getElementById('heartIcon');
+            this.classList.toggle('clicked');
+            heartIcon.classList.toggle('bi-heart');
+            heartIcon.classList.toggle('bi-heart-fill');
         });
     </script>
 </body>
