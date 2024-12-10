@@ -9,8 +9,11 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
   <link rel="stylesheet" href="../style.css">
   <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Poppins&display=swap" rel="stylesheet">
-
   <style>
+    :root {
+      --main-color: #800000;
+    }
+
     body {
       font-family: 'Poppins', sans-serif;
       background-color: #f4f4f4;
@@ -19,7 +22,7 @@
     }
 
     .navbar {
-      background-color: #800000;
+      background-color: var(--main-color);
       color: white;
       padding: 1rem;
     }
@@ -33,7 +36,7 @@
     }
 
     h2 {
-      color: #800000;
+      color: var(--main-color);
       margin-bottom: 20px;
     }
 
@@ -42,7 +45,7 @@
     }
 
     .btn-publish {
-      background-color: #800000;
+      background-color: var(--main-color);
       color: white;
     }
 
@@ -56,17 +59,16 @@
       margin: 10px 0;
       border-radius: 5px;
     }
-    
+
     .chapter-list {
       margin-bottom: 20px;
     }
   </style>
 </head>
 <body>
-
   <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
     <div class="container-fluid">
-        <a class="navbar-brand" href="pagina_inicial.html">
+        <a class="navbar-brand" href="dashboard.html">
             <img src="../img/5.png" alt="Logo" width="50" height="auto">
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -115,11 +117,11 @@
                 </li>
             </ul>
             <form class="d-flex mx-auto" style="max-width: 600px;" action="results_pesquisa.html" method="get">
-              <input class="form-control me-2" type="search" placeholder="Pesquisar histórias e autores" aria-label="Search" name="query">
-              <button class="btn btn-outline-light" type="submit" style="border-radius: 50%; padding: 0 10px;">
-                  <i class="bi bi-search"></i>
-              </button>
-          </form>
+                <input class="form-control me-2" type="search" placeholder="Pesquisar histórias e autores" aria-label="Search" name="query">
+                <button class="btn btn-outline-light" type="submit" style="border-radius: 50%; padding: 0 10px;">
+                    <i class="bi bi-search"></i>
+                </button>
+            </form>
 
         </div>
     </div>
@@ -133,7 +135,6 @@
         </div>
       </div>
 </nav>
-
 
   <div class="form-container">
     <h2>Escrever Nova História</h2>
@@ -158,49 +159,70 @@
           <input type="text" class="form-control" id="capitulo-titulo-1" placeholder="Digite o título do capítulo 1" required>
           <label for="capitulo-1">Conteúdo do Capítulo 1</label>
           <textarea class="form-control" id="capitulo-1" rows="4" placeholder="Escreva o primeiro capítulo" required></textarea>
-          <button type="button" class="btn btn-danger" onclick="removeChapter(1)">Apagar Capítulo</button>
+          <button type="button" class="btn btn-danger" onclick="removeChapter(1)" title="Apagar este capítulo">Apagar Capítulo</button>
         </div>
       </div>
-      <button type="button" class="btn btn-secondary" onclick="addChapter()">Adicionar Novo Capítulo</button>
+      <button type="button" class="btn btn-secondary" onclick="addChapter()" title="Adicionar novo capítulo">Adicionar Novo Capítulo</button>
 
       <div class="form-group">
         <label for="tags">Tags</label>
         <input type="text" class="form-control" id="tags" placeholder="Digite as tags separadas por vírgula" required>
       </div>
-      <button type="submit" class="btn btn-publish">Publicar</button>
+      <button type="submit" class="btn btn-publish" title="Publicar sua história">Publicar</button>
     </form>
   </div>
 
   <script>
+    let historias = JSON.parse(localStorage.getItem('historias')) || [];
     let chapterCount = 1;
-
+  
     function addChapter() {
       chapterCount++;
-      const newChapter = document.createElement('div');
-      newChapter.className = 'chapter-container';
-      newChapter.id = `chapter-${chapterCount}`;
-      newChapter.innerHTML = `
-        <label for="capitulo-titulo-${chapterCount}">Título do Capítulo ${chapterCount}</label>
-        <input type="text" class="form-control" id="capitulo-titulo-${chapterCount}" placeholder="Digite o título do capítulo ${chapterCount}" required>
-        <label for="capitulo-${chapterCount}">Conteúdo do Capítulo ${chapterCount}</label>
-        <textarea class="form-control" id="capitulo-${chapterCount}" rows="4" placeholder="Escreva o capítulo ${chapterCount}" required></textarea>
-        <button type="button" class="btn btn-danger" onclick="removeChapter(${chapterCount})">Apagar Capítulo</button>
+      const newChapter = `
+        <div class="chapter-container" id="chapter-${chapterCount}">
+          <label for="capitulo-titulo-${chapterCount}">Título do Capítulo ${chapterCount}</label>
+          <input type="text" class="form-control" id="capitulo-titulo-${chapterCount}" placeholder="Digite o título do capítulo ${chapterCount}" required>
+          <label for="capitulo-${chapterCount}">Conteúdo do Capítulo ${chapterCount}</label>
+          <textarea class="form-control" id="capitulo-${chapterCount}" rows="4" placeholder="Escreva o capítulo ${chapterCount}" required></textarea>
+          <button type="button" class="btn btn-danger" onclick="removeChapter(${chapterCount})" title="Apagar este capítulo">Apagar Capítulo</button>
+        </div>
       `;
-      document.getElementById('capitulos-section').appendChild(newChapter);
+      document.getElementById('capitulos-section').insertAdjacentHTML('beforeend', newChapter);
     }
-
+  
     function removeChapter(chapterNumber) {
-      const chapter = document.getElementById(`chapter-${chapterNumber}`);
-      if (chapter) {
-        chapter.remove();
+      const chapterElement = document.getElementById(`chapter-${chapterNumber}`);
+      if (chapterElement) {
+        chapterElement.remove();
+        chapterCount--;
       }
     }
-
-    document.getElementById('nova-historia-form').addEventListener('submit', function(event) {
+  
+    document.getElementById('nova-historia-form').addEventListener('submit', function (event) {
       event.preventDefault();
-
+  
+      const historia = {
+        id: Date.now(), // Gera um ID único baseado no timestamp
+        capa: document.getElementById('capa').value,
+        titulo: document.getElementById('titulo').value,
+        descricao: document.getElementById('descricao').value,
+        capitulos: [],
+        tags: document.getElementById('tags').value.split(','),
+      };
+  
+      for (let i = 1; i <= chapterCount; i++) {
+        const tituloCapitulo = document.getElementById(`capitulo-titulo-${i}`).value;
+        const conteudoCapitulo = document.getElementById(`capitulo-${i}`).value;
+  
+        historia.capitulos.push({ titulo: tituloCapitulo, conteudo: conteudoCapitulo });
+      }
+  
+      historias.push(historia);
+      localStorage.setItem('historias', JSON.stringify(historias));
       alert('História publicada com sucesso!');
+      window.location.href = 'minhasobras.html';
     });
   </script>
+  
 </body>
 </html>

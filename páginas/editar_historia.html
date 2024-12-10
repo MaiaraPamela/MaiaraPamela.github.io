@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Editar Historia</title>
+    <link rel="icon" href="../img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-icons/1.10.5/font/bootstrap-icons.min.css">
+    <link rel="stylesheet" href="../style.css">
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="dashboard.html">
+                <img src="../img/5.png" alt="Logo" width="50" height="auto">
+            </a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span> 
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                   
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="fandomsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Fandoms
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="fandomsDropdown">
+                            <li><a class="dropdown-item" href="fandomUm.html">Anime e Mangá</a></li>
+                        </ul>
+                    </li>
+             
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navegarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Navegar
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navegarDropdown">
+                            <li><a class="dropdown-item" href="colecoes.html">Coleções</a></li>
+                        </ul>
+                    </li>
+                  
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="publicarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Publicar
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="publicarDropdown">
+                            <li><a class="dropdown-item" href="login.html">Publicar Obra</a></li>
+                            <li><a class="dropdown-item" href="login.html">Criar Coleção</a></li>
+                        </ul>
+                    </li>
+               
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="sobreDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            Sobre
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="sobreDropdown">
+                            <li><a class="dropdown-item" href="sobre.html">Sobre o AO3</a></li>
+                            <li><a class="dropdown-item" href="organizacoes.html">Organização para Obras Transformativas</a></li>
+                            <li><a class="dropdown-item" href="perguntas.html">Perguntas frequentes</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                <form class="d-flex mx-auto" style="max-width: 600px;" action="results_pesquisa.html" method="get">
+                    <input class="form-control me-2" type="search" placeholder="Pesquisar histórias e autores" aria-label="Search" name="query">
+                    <button class="btn btn-outline-light" type="submit" style="border-radius: 50%; padding: 0 10px;">
+                        <i class="bi bi-search"></i>
+                    </button>
+                </form>
+    
+            </div>
+        </div>
+        <div class="user-options">
+            <span>Olá, user</span>
+            <div class="user-options-content">
+              <a href="novaobra.html">Postar</a>
+              <a href="notificacoes.html">Notificações</a>
+              <a href="perfil.html">Perfil</a>
+              <a href="pagina_inicial.html">Log out</a>
+            </div>
+          </div>
+    </nav>
+    <div class="container">
+        <h2>Editar História</h2>
+        <form id="editar-historia-form">
+          <label for="titulo">Título:</label>
+          <input type="text" id="titulo" class="form-control" required>
+          
+          <label for="descricao">Descrição:</label>
+          <textarea id="descricao" class="form-control" rows="3" required></textarea>
+          
+          <div id="capitulos-section"></div>
+          
+          <button type="button" class="btn btn-primary" onclick="salvarAlteracoes()">Salvar Alterações</button>
+        </form>
+      </div>
+      
+      <script>
+        // Carrega a história a ser editada
+        const historia = JSON.parse(localStorage.getItem('historiaEditada'));
+      
+        if (historia) {
+          document.getElementById('titulo').value = historia.titulo;
+          document.getElementById('descricao').value = historia.descricao;
+      
+          const capitulosSection = document.getElementById('capitulos-section');
+          historia.capitulos.forEach((capitulo, index) => {
+            const chapterDiv = `
+              <div class="chapter-container">
+                <label for="capitulo-titulo-${index}">Título do Capítulo ${index + 1}</label>
+                <input type="text" id="capitulo-titulo-${index}" class="form-control" value="${capitulo.titulo}" required>
+                <label for="capitulo-${index}">Conteúdo:</label>
+                <textarea id="capitulo-${index}" class="form-control" rows="4" required>${capitulo.conteudo}</textarea>
+              </div>
+            `;
+            capitulosSection.insertAdjacentHTML('beforeend', chapterDiv);
+          });
+        } else {
+          alert('História não encontrada.');
+        }
+      
+        // Função para salvar as alterações
+        function salvarAlteracoes() {
+          historia.titulo = document.getElementById('titulo').value;
+          historia.descricao = document.getElementById('descricao').value;
+      
+          historia.capitulos = [];
+          for (let i = 0; i < historia.capitulos.length; i++) {
+            const titulo = document.getElementById(`capitulo-titulo-${i}`).value;
+            const conteudo = document.getElementById(`capitulo-${i}`).value;
+            historia.capitulos.push({ titulo, conteudo });
+          }
+      
+          // Atualizar no LocalStorage
+          let historias = JSON.parse(localStorage.getItem('historias')) || [];
+          historias = historias.map((h) => (h.id === historia.id ? historia : h));
+          localStorage.setItem('historias', JSON.stringify(historias));
+      
+          alert('Alterações salvas com sucesso!');
+          window.location.href = 'minhasobras.html'; // Voltar para a lista de histórias
+        }
+      </script>
+      
+</body>
+</html>

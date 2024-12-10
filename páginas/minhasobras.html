@@ -130,32 +130,90 @@
 </nav>
 
 
-  <div class="container">
-    <h2>Minhas Obras</h2>
+<div class="container">
+  <h2>Minhas Obras</h2>
+  <div id="lista-historias"></div>
+</div>
 
-    <div class="story-card">
-      <h4>Título: A jornada o Herói</h4>
-      <p class="story-status">Status: Rascunho</p>
-      <p>Uma épica jornada em um mundo mágico, onde um jovem herói enfrenta desafios inimagináveis.</p>
-      <a href="primeirocap.html" class="btn btn-edit">Ir à história</a>
-    </div>
 
-    <div class="story-card">
-      <h4>Título: Entre Dois Mundos</h4>
-      <p class="story-status">Status: Rascunho</p>
-      <p>Uma história sobre amor e escolhas difíceis, onde uma jovem deve decidir entre dois mundos.</p>
-      <a href="primeirocap.html" class="btn btn-edit">Ir à história</a>
-    </div>
+<script>
+  // Variável para armazenar as histórias
+  let historias = [];
 
-    <div class="story-card">
-      <h4>Título: O Mistério da Floresta Encantada</h4>
-      <p class="story-status">Status: Publicada</p>
-      <p>Um suspense envolvente sobre o que realmente se esconde nas profundezas de uma floresta encantado.</p>
-      <a href="primeirocap.html" class="btn btn-edit">Ir à história</a>
-    </div>
+  // Função para carregar histórias do LocalStorage
+  function carregarHistoriasDoStorage() {
+    const data = localStorage.getItem('historias');
+    if (data) {
+      historias = JSON.parse(data);
+    } else {
+      historias = [];
+    }
+  }
 
- 
-  </div>
+  // Função para exibir as histórias na página
+  function exibirHistorias() {
+    const lista = document.getElementById('lista-historias');
+    lista.innerHTML = '';
 
+    if (historias.length === 0) {
+      lista.innerHTML = '<p>Você ainda não tem histórias criadas.</p>';
+      return;
+    }
+
+    historias.forEach((historia) => {
+      const card = document.createElement('div');
+      card.className = 'story-card';
+
+      card.innerHTML = `
+        <h4>Título: ${historia.titulo}</h4>
+        <p class="story-status">Status: ${historia.capitulos.length > 0 ? 'Publicada' : 'Rascunho'}</p>
+        <p>${historia.descricao}</p>
+        <button class="btn btn-edit" onclick="verHistoria(${historia.id})">Ir à história</button>
+        <button class="btn btn-edit" onclick="editarHistoria(${historia.id})">Editar</button>
+        <button class="btn btn-delete btn-secondary" onclick="excluirHistoria(${historia.id})">Excluir</button>
+      `;
+
+      lista.appendChild(card);
+    });
+  }
+
+  // Função para redirecionar para a página da história
+  function verHistoria(id) {
+    const historiaSelecionada = historias.find((historia) => historia.id === id);
+    if (historiaSelecionada) {
+      localStorage.setItem('historiaAtual', JSON.stringify(historiaSelecionada));
+      window.location.href = 'ver_historia.html';
+    } else {
+      alert('História não encontrada!');
+    }
+  }
+
+  // Função para redirecionar para a página de edição
+  function editarHistoria(id) {
+    const historiaSelecionada = historias.find((historia) => historia.id === id);
+    if (historiaSelecionada) {
+      localStorage.setItem('historiaEditada', JSON.stringify(historiaSelecionada));
+      window.location.href = 'editar_historia.html'; // Página de edição
+    } else {
+      alert('História não encontrada!');
+    }
+  }
+
+  // Função para excluir uma história
+  function excluirHistoria(id) {
+    if (confirm('Tem certeza de que deseja excluir esta história?')) {
+      historias = historias.filter((historia) => historia.id !== id);
+      localStorage.setItem('historias', JSON.stringify(historias));
+      alert('História excluída com sucesso!');
+      exibirHistorias(); // Atualiza a lista na página
+    }
+  }
+
+  // Carregar histórias ao abrir a página
+  carregarHistoriasDoStorage();
+  exibirHistorias();
+</script>
+
+  
 </body>
 </html>
