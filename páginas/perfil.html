@@ -216,7 +216,54 @@
         <p>Nos siga/Entre em contato:</p>
         <a href="https://x.com/AO3_Status">Twitter</a> | <a href="https://ao3org.tumblr.com/">Tumblr</a>
     </footer>
-    
+    <script>
+        document.addEventListener('DOMContentLoaded', function () {
+    // Carregar histórias do localStorage
+    const historias = JSON.parse(localStorage.getItem('historias')) || [];
+    const historiaSection = document.querySelector('.historia-section');
+
+    // Limpar o conteúdo atual (se houver)
+    historiaSection.innerHTML = '<h5>Histórias Publicadas:</h5>';
+
+    if (historias.length === 0) {
+        historiaSection.innerHTML += '<p>Você ainda não publicou nenhuma história.</p>';
+        return;
+    }
+
+    // Iterar pelas histórias e criar os cards
+    historias.forEach(historia => {
+        const historiaCard = document.createElement('div');
+        historiaCard.className = 'historia-card';
+
+        historiaCard.innerHTML = `
+            <img src="${historia.capa || 'https://via.placeholder.com/100x150'}" 
+                 alt="Capa da História" 
+                 style="float:left; margin-right: 10px; width: 100px; height: 150px; object-fit: cover;">
+            <h6><strong>${historia.titulo}</strong></h6>
+            <p><em>Autor: Nome do Usuário</em></p>
+            <p><strong>Descrição:</strong> ${historia.descricao}</p>
+            <p><strong>Capítulos:</strong> ${historia.capitulos.length}</p>
+            <p><strong>Tags:</strong> ${historia.tags.map(tag => `#${tag.trim()}`).join(', ')}</p>
+            <a href="ver_historia.html" class="btn btn-custom" onclick="abrirHistoria(${historia.id})">Ler História</a>
+        `;
+
+        historiaSection.appendChild(historiaCard);
+    });
+});
+
+// Função para salvar a história selecionada no localStorage e redirecionar
+function abrirHistoria(id) {
+    const historias = JSON.parse(localStorage.getItem('historias')) || [];
+    const historiaSelecionada = historias.find(historia => historia.id === id);
+    if (historiaSelecionada) {
+        localStorage.setItem('historiaAtual', JSON.stringify(historiaSelecionada));
+        window.location.href = 'ver_historia.html';
+    } else {
+        alert('História não encontrada!');
+    }
+}
+
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js"></script>
 </body>
 </html>
